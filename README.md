@@ -1,44 +1,45 @@
 <h2>Basic tools for a validator node in Celestia</h2>
 <h3>The first modular blockchain</h3>
-<img src='https://user-images.githubusercontent.com/2853158/208320040-6e086387-d3e5-47d6-b52f-1446b7af0641.png'>
+<img src='https://user-images.githubusercontent.com/2853158/208461248-2c3f7414-c66e-4b6c-9c06-7f0c1c4e1851.png'>
+
 
 <h3>📌 Overview</h3>
-OKP4 is a domain-specific, layer 1 blockchain dedicated to the exchange of data with minimal trust. Digital Territory for the Data Economy and the Next Generation of Data Applications
+<p>Celestia is the first modular blockchain with a scalable general purpose data availability layer for decentralised applications and trust-minimised sidechains.</p>
 
-OKP4 is PoS and is based on Tendermint. Its validators participate in the consensus protocol by casting votes containing cryptographic signatures signed by each validator’s private key.
+<p>The core idea of Celestia is to decouple transaction execution (and validity) from the consensus layer, so that the consensus is only responsible for a) ordering transactions and b) guaranteeing their data availability. They believe that is the next generation of scalable blockchain architectures.</p>
 
-The KNOW is the native token of OKP4.
+<p>TIA is the native token of Celestia.</p>
 
-Chain ID: okp4-nemeton-1 | Latest version Tag: v3.0.0
+<p>Chain ID: mocha | arabica</p>
 
 <h3>🌐 Useful links</h3>
-Website: https://okp4.network
+● Website: https://celestia.org/
 
-GitHub: https://github.com/okp4/okp4d
+● GitHub: https://github.com/celestiaorg
 
-OKP4 whitepaper and documentation: https://docs.okp4.network
+● Celestia documentation: https://docs.celestia.org/
 
-Frequently Asked Questions: https://nemeton.okp4.network/faq#faq
+● Frequently Asked Questions: https://celestia.org/faq/
 
-Cumulo Spanish Resources: http://cumulo.pro/okp4.html
+● Cumulo Spanish Resources: http://cumulo.pro/celestia.html
 
 <h4>Social media:</h4>
-● Twitter: https://twitter.com/OKP4_Protocol
+● Twitter: https://twitter.com/CelestiaOrg
 
-● Telegram: https://t.me/okp4network
+● Telegram: https://t.me/CelestiaCommunity
 
-● Discord: https://discord.com/invite/okp4
+● Discord: https://discord.gg/celestiacommunity
 
-● Medium: https://blog.okp4.network/
+● Blog: https://blog.celestia.org/
 
-● LinkedIn: https://www.linkedin.com/company/okp4-open-knowledge-protocol-for/
+● LinkedIn: https://www.linkedin.com/company/celestiaorg/
 
-● Youtube: https://www.youtube.com/@okp4351
+● Youtube: https://www.youtube.com/@celestia7066
 
 <h4>Explorers:</h4>
-● https://explore.okp4.network/
+● https://celestia.explorers.guru/
 
-● https://okp4.explorers.guru/
+● https://testnet-explorer.brocha.in/celestia/
 
 <h3>⚙️Hardware requirements</h3>
 ● Memory: 8 GB RAM
