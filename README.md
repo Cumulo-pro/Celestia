@@ -302,30 +302,31 @@ source $HOME/.bash_profile</pre>
 
 <h3>✔️ Validator operation</h3>
 <h4>Edit validator</h4>
-<pre>okp4d tx staking edit-validator \
+<pre>celestia-appd tx staking edit-validator \
   --moniker=$NODENAME \
   --identity=<keybase_id> \
   --website="<website>" \
   --details="<validator_description>" \
-  --chain-id=$OKP4_CHAIN_ID \
-  --from=$OKP4_WALLET</pre>
+  --chain-id=$CELESTIA_CHAIN_ID \
+  --from=$CELESTIA_WALLET
+  --fees=200utia</pre>
   
 <h3>Validator information</h3>
-<pre>okp4d status 2>&1 | jq .ValidatorInfo</pre>
+<pre>celestia-appd status 2>&1 | jq .ValidatorInfo</pre>
 <h4>Jailing information</h4>
-<pre>okp4d q slashing signing-info $(okp4d tendermint show-validator)</pre>
+<pre>celestia-appd q slashing signing-info $(celestia-appd tendermint show-validator)</pre>
 <h4>Validator unjailing</h4>
-<pre>okp4d tx slashing unjail --broadcast-mode=block --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas auto --gas-adjustment 1.5</pre>
+<pre>celestia-appd tx slashing unjail --broadcast-mode=block --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.5</pre>
 
 <h3>🗑 Delete node</h3>
-<pre>sudo systemctl stop okp4d
-sudo systemctl disable okp4d
-sudo rm -rf /etc/systemd/system/okp4d*
+<pre>sudo systemctl stop celestia-appd
+sudo systemctl disable celestia-appd
+sudo rm -rf /etc/systemd/system/celestia-appd*
 sudo systemctl daemon-reload
-sudo rm $(which okp4d)
-sudo rm -rf $HOME/.okp4d
-sudo rm -fr $HOME/ okp4d
-sed -i "/OKP4_/d" $HOME/.bash_profile</pre>
+sudo rm $(which celestia-appd)
+sudo rm -rf $HOME/.celestia-appd
+sudo rm -fr $HOME/ celestia-appd
+sed -i "/CELESTIA_/d" $HOME/.bash_profile</pre>
 
 <h3>Authors: Sami & Mon</h3>
 http://cumulo.pro/
