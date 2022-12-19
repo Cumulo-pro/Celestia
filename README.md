@@ -190,31 +190,51 @@ echo "export OKP4_WALLET_ADDRESS="${OKP4_WALLET_ADDRESS} >> $HOME/.bash_profile
 echo "export OKP4_VALOPER_ADDRESS="${OKP4_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile</pre>
 
+<h4>Configure the QGB Keys</h4>
+<p>This step helps you prepare for when the Quantum Gravity Bridge is ready to be deployed. You need to perform this step before running a validator, by configuring 2 additional keys.</p>
+● EVM-address: This flag must contain a 0x EVM address. Here, you can add any Ethereum-based address. You can also modify it later if you decide to change your address. To get this wallet address you can use a MetaMask address or an Ethereum wallet.
+● orchestrator-address: This flag must contain a newly generated Celestia address. Validators can use their existing Celestia addresses, but it is recommended to create a new one:
+
+<pre>celestia-appd keys add ${CELESTIA_WALLET}_2</pre>
+
+<p>You can set both values as environment variables:</p>
+<pre>ERC20_ADDRESS="0xdd5xxxxxxxxxxxxxxxx3a2720840001bC5F87D7x"
+CELESTIA_WALLET_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET -a)
+CELESTIA_VALOPER_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET --bech val -a)
+ORCHESTRATOR_ADDRESS=$(celestia-appd keys show ${CELESTIA_WALLET}_2 -a)
+echo "export CELESTIA_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo "export CELESTIA_ORCHESTRATOR_ADDRESS="${ORCHESTRATOR_ADDRESS} >> $HOME/.bash_profile
+echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
+echo "export EVM_ADDRESS=""$ERC20_ADDRESS" >> $HOME/.bash_profile
+source $HOME/.bash_profile</pre>
+
 <h4>Create validator</h4>
 <p>Before creating a validator, you should make sure that the node is synchronised and check the balance of your wallet.</p>
 
 <h5>Check synchronisation status</h5>
 <p>Once your node is fully synchronised, the output will read false.</p>
 
-<pre>okp4d status 2>&1 | jq .SyncInfo</pre>
+<pre>celestia-appd status 2>&1 | jq .SyncInfo</pre>
 
 <h5>Check your balance</h5>
-<pre>okp4d q bank balances $(okp4d keys show wallet -a)</pre>
+<pre>celestia-appd query bank balances $CELESTIA_WALLET_ADDRESS</pre>
 
 <h5>Create validator</h5>
-<pre>okp4d tx staking create-validator \
---amount=1000000uknow \
---pubkey=$(okp4d tendermint show-validator) \
---moniker=$OKP4_MONIKER \
---chain-id=$OKP4_CHAIN_ID \
---commission-rate=0.05 \
---commission-max-rate=0.20 \
---commission-max-change-rate=0.01 \
---min-self-delegation=1 \
---from=wallet \
---gas-adjustment=1.4 \
---gas=auto \
--y</pre>
+<pre>celestia-appd tx staking create-validator \
+  --amount 1000000utia \
+  --from $CELESTIA_WALLET \
+  --commission-max-change-rate "0.01" \
+  --commission-max-rate "0.2" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey  $(celestia-appd tendermint show-validator) \
+  --moniker $CELESTIA_MONIKER \
+  --chain-id $CELESTIA_CHAIN_ID \
+  --evm-address "$EVM_ADDRESS" \
+  --orchestrator-address "$CELESTIA_ORCHESTRATOR_ADDRESS" \
+  --gas auto \
+  --gas-adjustment 1.3 \
+  --fees 1000utia</pre>
 
 <p>You can add the flags — website — security-contact — identity — details (optional)</p>
 
@@ -228,57 +248,57 @@ source $HOME/.bash_profile</pre>
 
 <h3>🛎 SystemD commands</h3>
 <h4>Stop the service</h4>
-<pre>sudo systemctl stop okp4d</pre>
+<pre>sudo systemctl stop celestia-appd</pre>
 <h4>Start service</h4>
-<pre>sudo systemctl start okp4d</pre>
+<pre>sudo systemctl start celestia-appd</pre>
 <h4>Restart service</h4>
-<pre>sudo systemctl restart okp4d</pre>
+<pre>sudo systemctl restart celestia-appd</pre>
 <h4>Check logs</h4>
-<pre>sudo journalctl -u okp4d -f --no-hostname -o cat</pre>
+<pre>sudo journalctl -u celestia-appd -f</pre>
 <h4>Check status</h4>
-<pre>sudo systemctl status okp4d</pre>
+<pre>sudo systemctl status celestia-appd</pre>
 
 <h3>📈 Node information</h3>
 <h4>Synchronization information</h4>
-<pre>okp4d status 2>&1 | jq .SyncInfo</pre>
+<pre>celestia-appd status 2>&1 | jq .SyncInfo</pre>
 <h4>Node information</h4>
-<pre>okp4d status 2>&1 | jq .NodeInfo</pre>
+<pre>celestia-appd status 2>&1 | jq .NodeInfo</pre>
 <h4>Validator information</h4>
-<pre>okp4d status 2>&1 | jq .ValidatorInfo</pre>
+<pre>celestia-appd status 2>&1 | jq .ValidatorInfo</pre>
 <h4>Get peers</h4>
-<pre>echo $(okp4d tendermint show-node-id)'@'$(curl -s ifconfig.me)':'$(cat $HOME/.okp4d /config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')</pre>
+<pre>echo $(celestia-appd tendermint show-node-id)'@'$(curl -s ifconfig.me)':'$(cat $HOME/.celestia-appd/config/config.toml | sed -n '/Address to listen for incoming connection/{n;p;}' | sed 's/.*://; s/".*//')</pre>
 
 <h3>🔏 Wallet operation</h3>
 <h4>Check balance</h4>
-<pre>okp4d query bank balances $OKP4_WALLET_ADDRESS</pre>
+<pre>celestia-appd query bank balances $CELESTIA_WALLET_ADDRESS</pre>
 <h4>Wallet Key List</h4>
-<pre>okp4d keys list</pre>
+<pre>celestia-appd keys list</pre>
 <h4>Create a new wallet</h4>
-<pre>okp4d keys add $OKP4_WALLET</pre>
+<pre>celestia-appd keys add $CELESTIA_WALLET</pre>
 <h4>Wallet recovering</h4>
-<pre>okp4d keys add $OKP4_WALLET --recover</pre>
+<pre>celestia-appd keys add $CELESTIA_WALLET --recover</pre>
 <h4>Delete wallet</h4>
-<pre>okp4d keys delete $OKP4_WALLET</pre>
+<pre>celestia-appd keys delete $CELESTIA_WALLET</pre>
 <h4>Transfer funds</h4>
-<pre>okp4d tx bank send $OKP4_WALLET_ADDRESS <TO_OKP4_WALLET_ADDRESS> 800000000uknow --gas auto --gas-adjustment 1.3</pre>
+<pre>celestia-appd tx bank send $CELESTIA_WALLET_ADDRESS <ANOTHER_CELESTIA_WALLET_ADDRESS> 800000000utia --gas auto --gas-adjustment 1.3</pre>
 
 <h3>💬 Governance</h3>
 <h4>List all proposals</h4>
-<pre>okp4d query gov proposal 1</pre>
+<pre>celestia-appd query gov proposal 1</pre>
 <h4>Vote YES</h4>
-<pre>okp4d tx gov vote 1 yes --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
+<pre>celestia-appd tx gov vote 1 yes --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
 <h4>Vote NO</h4>
-<pre>okp4d tx gov vote 1 no --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
+<pre>celestia-appd tx gov vote 1 no --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
 <h4>Refrain</h4>
-<pre>okp4d tx gov vote 1 abstain --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
+<pre>celestia-appd tx gov vote 1 abstain --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
 
 <h3>🚰 Staking, delegation and rewards</h3>
 <h4>Withdraw all rewards</h4>
-<pre>okp4d tx distribution withdraw-all-rewards --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas auto --gas-adjustment 1.3</pre>
+<pre>celestia-appd tx distribution withdraw-all-rewards --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.3</pre>
 <h4>Withdraw commission</h4>
-<pre>okp4d tx distribution withdraw-rewards $OKP4_VALOPER_ADDRESS --from $OKP4_WALLET --commission --fees 20uknow</pre>
+<pre>celestia-appd tx distribution withdraw-rewards $CELESTIA_VALOPER_ADDRESS --from $CELESTIA_WALLET --commission --fees 20utia</pre>
 <h4>Delegate Stake</h4>
-<pre>okp4d tx staking delegate $OKP4_VALOPER_ADDRESS 10000000uknow --from $OKP4_WALLET --chain-id $OKP4_CHAIN_ID --gas=auto --gas-adjustment 1.3</pre>
+<pre>celestia-appd tx staking delegate $CELESTIA_VALOPER_ADDRESS 10000000utia --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas=auto --gas-adjustment 1.3</pre>
 
 <h3>✔️ Validator operation</h3>
 <h4>Edit validator</h4>
