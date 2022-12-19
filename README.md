@@ -44,22 +44,24 @@
 <h3>⚙️Hardware requirements</h3>
 ● Memory: 8 GB RAM
 
-● CPU: 2 core
+● CPU: Quad-Core
 
-● Disk: 200 GB of storage
+● Disk: 250 GB of storage
+
+● Bandwidth: 1 Gbps for Download/100 Mbps for Upload
 
 <h3>🛠 Manual installation</h3>
 
 <h4>Updating packages and installing dependencies</h4>
 <pre>sudo apt update && sudo apt upgrade -y
-sudo apt install curl git wget htop tmux build-essential jq make gcc -y</pre>
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential git make ncdu -y</pre>
 
 <h4>Environment variables</h4>
 To set environment variables replace your wallet and moniker < YOUR_WALLET_NAME> < YOUR_MONIKER> without <> , and save and import the variables into the system.
 
-<pre>echo "export OKP4_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
-echo "export OKP4_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
-echo "export OKP4_CHAIN_ID="okp4-nemeton-1"" >> $HOME/.bash_profile
+<pre>echo "export CELESTIA_WALLET="<YOUR_WALLET_NAME>"" >> $HOME/.bash_profile
+echo "export CELESTIA_MONIKER="<YOUR_MONIKER>"" >> $HOME/.bash_profile
+echo "export CELESTIA_CHAIN_ID="mocha"" >> $HOME/.bash_profile
 source $HOME/.bash_profile</pre>
 
 <h4>Install go</h4>
