@@ -192,7 +192,7 @@ source $HOME/.bash_profile</pre>
 
 <h4>Configure the QGB Keys</h4>
 <p>This step helps you prepare for when the Quantum Gravity Bridge is ready to be deployed. You need to perform this step before running a validator, by configuring 2 additional keys.</p>
-● EVM-address: This flag must contain a 0x EVM address. Here, you can add any Ethereum-based address. You can also modify it later if you decide to change your address. To get this wallet address you can use a MetaMask address or an Ethereum wallet.
+● EVM-address: This flag must contain a 0x EVM address. Here, you can add any Ethereum-based address. You can also modify it later if you decide to change your address. To get this wallet address you can use a MetaMask address or an Ethereum wallet.<br>
 ● orchestrator-address: This flag must contain a newly generated Celestia address. Validators can use their existing Celestia addresses, but it is recommended to create a new one:
 
 <pre>celestia-appd keys add ${CELESTIA_WALLET}_2</pre>
