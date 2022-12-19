@@ -75,21 +75,25 @@ source $HOME/.bash_profile
 go version</pre>
 
 <h4>Download and compile binaries</h4>
-<pre>cd || return
-rm -rf okp4d
-git clone https://github.com/okp4/okp4d.git
-cd okp4d || return
-git checkout v3.0.0
-make install
-okp4d version # 3.0.0</pre>
+<pre>cd $HOME
+rm -rf celestia-app
+git clone https://github.com/celestiaorg/celestia-app.git
+cd celestia-app/
+APP_VERSION=v0.11.0
+git checkout tags/$APP_VERSION -b $APP_VERSION
+make install</pre>
+
+<h4>Setup the P2P networks</h4>
+<pre>cd $HOME
+rm -rf networks
+git clone https://github.com/celestiaorg/networks.git</pre>
 
 <h4>Configure and start the application</h4>
-<pre>okp4d config chain-id okp4-nemeton-1
-okp4d init $OKP4_MONIKER --chain-id $OKP4_CHAIN_ID</pre>
+<pre>celestia-appd config chain-id mocha
+celestia-appd init $CELESTIA_MONIKER --chain-id mocha</pre>
 
 <h4>Download genesis</h4>
-<pre>url https://raw.githubusercontent.com/okp4/networks/main/chains/nemeton-1/genesis.json > $HOME/.okp4d/config/genesis.json
-sha256sum $HOME/.okp4d/config/genesis.json #2ec25f81cc2abecbc0da3de45b052ea3314d0d658b1b7f4c7b6a48d09254c742</pre>
+<pre>cp $HOME/networks/mocha/genesis.json $HOME/.celestia-app/config</pre>
 
 <h4>Set seeds and peers</h4>
 Seeds
