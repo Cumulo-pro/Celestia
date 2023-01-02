@@ -317,7 +317,7 @@ source $HOME/.bash_profile</pre>
 <pre>celestia-appd q slashing signing-info $(celestia-appd tendermint show-validator)</pre>
 <h4>Validator unjailing</h4>
 <pre>celestia-appd tx slashing unjail --broadcast-mode=block --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas auto --gas-adjustment 1.5</pre>
-
+ 
 <h3>🗑 Delete node</h3>
 <pre>sudo systemctl stop celestia-appd
 sudo systemctl disable celestia-appd
