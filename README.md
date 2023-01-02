@@ -128,7 +128,7 @@ sed -i -e "s/^indexer *=.*/indexer = \"null\"/" $HOME/.celestia-app/config/confi
 
 <h4>Clean up old data<h4>
 <pre>celestia-appd tendermint unsafe-reset-all --home $HOME/.celestia-app --keep-addr-book</pre>
- 
+
  
 <h3>♻️ Fast synchronisation with snapshot (Optional)</h3>
 <p>You can sync your Celestia node quickly by downloading a recent snapshot:</p>
