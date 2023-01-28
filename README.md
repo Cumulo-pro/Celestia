@@ -285,7 +285,7 @@ source $HOME/.bash_profile</pre>
 
 <h3>💬 Governance</h3>
 <h4>List all proposals</h4>
-<pre>celestia-appd query gov proposal 1</pre>
+<pre>celestia-appd query gov proposals</pre>
 <h4>Vote YES</h4>
 <pre>celestia-appd tx gov vote 1 yes --from $CELESTIA_WALLET --chain-id $CELESTIA_CHAIN_ID --gas-adjustment 1.4 --gas auto -y</pre>
 <h4>Vote NO</h4>
