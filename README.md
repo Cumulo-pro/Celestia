@@ -178,17 +178,17 @@ sudo journalctl -u celestia-appd -f</pre>
 <pre>celestia-appd keys add $CELESTIA_WALLET --recover</pre>
 
 <h4>Deposit funds into your wallet</h4>
-<p>Before creating a validator, you have to deposit funds in your wallet, go to the OKP4 discord server and request them in the faucet channel.</p>
+<p>Before creating a validator, you have to deposit funds in your wallet, go to the Celestia discord server and request them in the faucet channel.</p>
 
 <pre>$request <address wallet></pre>
 
 <h3>📝Validator</h3>
 
 <h4>Save the wallet and validator address</h4>
-<pre>OKP4_WALLET_ADDRESS=$(okp4d keys show $CELESTIA_WALLET -a)
-OKP4_VALOPER_ADDRESS=$(okp4d keys show $CELESTIA_WALLET --bech val -a)
-echo "export OKP4_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
-echo "export OKP4_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
+<pre>CELESTIA_WALLET_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET -a)
+CELESTIA_VALOPER_ADDRESS=$(celestia-appd keys show $CELESTIA_WALLET --bech val -a)
+echo "export CELESTIA_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo "export CELESTIA_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile</pre>
 
 <h4>Configure the QGB Keys</h4>
