@@ -185,10 +185,10 @@ sudo journalctl -u celestia-appd -f</pre>
 <h3>📝Validator</h3>
 
 <h4>Save the wallet and validator address</h4>
-<pre>OKP4_WALLET_ADDRESS=$(okp4d keys show $OKP4_WALLET -a)
-OKP4_VALOPER_ADDRESS=$(okp4d keys show $OKP4_WALLET --bech val -a)
-echo "export OKP4_WALLET_ADDRESS="${OKP4_WALLET_ADDRESS} >> $HOME/.bash_profile
-echo "export OKP4_VALOPER_ADDRESS="${OKP4_VALOPER_ADDRESS} >> $HOME/.bash_profile
+<pre>OKP4_WALLET_ADDRESS=$(okp4d keys show $CELESTIA_WALLET -a)
+OKP4_VALOPER_ADDRESS=$(okp4d keys show $CELESTIA_WALLET --bech val -a)
+echo "export OKP4_WALLET_ADDRESS="${CELESTIA_WALLET_ADDRESS} >> $HOME/.bash_profile
+echo "export OKP4_VALOPER_ADDRESS="${CELESTIA_VALOPER_ADDRESS} >> $HOME/.bash_profile
 source $HOME/.bash_profile</pre>
 
 <h4>Configure the QGB Keys</h4>
