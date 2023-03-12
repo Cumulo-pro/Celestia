@@ -108,15 +108,9 @@ https://github.com/celestiaorg/networks/blob/master/mocha/peers.txt</p>
 
 <h4>Configure pruning</h4>
 <pre>
-PRUNING="custom"
-PRUNING_KEEP_RECENT="100"
-PRUNING_INTERVAL="10"
- 
-sed -i -e "s/^pruning *=.*/pruning = \"$PRUNING\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \
-\"$PRUNING_KEEP_RECENT\"/" $HOME/.celestia-app/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \
-\"$PRUNING_INTERVAL\"/" $HOME/.celestia-app/config/app.toml</pre>
+sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.celestia-app/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"10\"/" $HOME/.celestia-app/config/app.toml</pre>
 
 <h4>Set the minimum gas price</h4>
 <pre>sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0utia\"/" $HOME/.celestia-app/config/app.toml
