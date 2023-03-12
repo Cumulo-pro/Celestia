@@ -139,16 +139,18 @@ wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
 <h3>🛎 Service with SystemD</h3>
 Create the service file
 <pre>
-sudo tee <<EOF >/dev/null /etc/systemd/system/celestia-appd.service
+sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
 [Unit]
-Description=celestia-appd Cosmos daemon
+Description=celestia
 After=network-online.target
+
 [Service]
 User=$USER
-ExecStart=$HOME/go/bin/celestia-appd start
+ExecStart=$(which celestia-appd) start --home $HOME/.celestia-app/
 Restart=on-failure
 RestartSec=3
-LimitNOFILE=4096
+LimitNOFILE=65535
+
 [Install]
 WantedBy=multi-user.target
 EOF
