@@ -139,7 +139,7 @@ wget -O - https://snaps.qubelabs.io/celestia/${SNAP_NAME} | tar xf - \
 <h3>🛎 Service with SystemD</h3>
 Create the service file
 <pre>
-sudo tee /etc/systemd/system/celestia-appd.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/celestia-appd.service > /dev/null &#x3C;&#x3C;EOF
 [Unit]
 Description=celestia
 After=network-online.target
