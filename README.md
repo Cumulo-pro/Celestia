@@ -60,7 +60,7 @@ sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential gi
 To set environment variables replace your wallet and moniker < YOUR_WALLET_NAME> < YOUR_MONIKER> without <> , and save and import the variables into the system.
 
 <pre>echo "export CELESTIA_WALLET=" << -YOUR_WALLET_NAME- >> "" >> $HOME/.bash_profile
-echo "export CELESTIA_MONIKER=" <YOUR_MONIKER> "" >> $HOME/.bash_profile
+echo "export CELESTIA_MONIKER=" < < -YOUR_MONIKER-> > "" >> $HOME/.bash_profile
 echo "export CELESTIA_CHAIN_ID="mocha"" >> $HOME/.bash_profile
 source $HOME/.bash_profile</pre>
 
